@@ -2,6 +2,8 @@
 
 > 📜 每日玄学点餐指南 —— 把麦当劳的实时数据变成一份能截图分享的老黄历。
 
+![麦门老黄历效果预览](images/preview.png)
+
 每天早上问一句"今天麦当劳吃什么"，本 Skill 会调用麦当劳 MCP 拿到**当天活动、卡包券、积分、抽奖状态和你的历史订单**，按一套可复现的规则推算出：
 
 - 🔶 **今日宜**：该参加的活动、该领的券、该花的快过期积分
@@ -96,7 +98,12 @@ mcd-almanac/
 ├── SKILL.md                     # 技能入口：触发条件、执行流程、核心原则
 ├── references/
 │   ├── almanac-rules.md         # 宜忌判定规则、指数算法、签文话术库
-│   └── card-template.md         # 老黄历卡片输出模板
+│   ├── card-template.md         # 老黄历卡片输出规则（HTML 默认 / Markdown 降级）
+│   └── card-template.html       # HTML 卡片模板（麦当劳官方设计语言）
+├── examples/
+│   └── almanac-2026-10-09.html  # 真实数据填充的演示卡片
+├── images/
+│   └── preview.png              # 效果图
 ├── README.md                    # 本文件
 ├── MCP_INTEGRATION.md           # 麦当劳 MCP 集成说明
 └── CONTEST_DECLARATION.md       # 参赛声明（官方原文）
