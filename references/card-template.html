@@ -1,0 +1,134 @@
+<!--
+  麦门老黄历 · HTML 卡片模板（麦当劳官方设计语言）
+  使用方法：复制本文件，将所有 {{占位符}} 替换为按 almanac-rules.md 推算出的实时数据，
+  保存为 almanac-{{日期}}.html。样式表禁止改动，配色遵循麦当劳官方品牌色：
+  麦当劳红 #DA291C / 麦当劳金黄 #FFC72C / 黑白灰。
+  占位符清单：
+    {{DATE}}          日期，如 2026-10-09
+    {{WEEKDAY}}       星期，如 周五
+    {{YI_ITEMS}}      今日宜 <li> 列表，每条含数据来源角标
+    {{JI_ITEMS}}      今日忌 <li> 列表，每条含数据来源角标
+    {{LUCKY_ITEM}}    幸运单品名
+    {{LUCKY_KCAL}}    幸运单品热量（约 X kcal）
+    {{WEALTH_STARS}}  财气 ★ 串
+    {{LUCK_STARS}}    手气 ★ 串
+    {{INDEX_STARS}}   幸运指数 ★ 串
+    {{STAT_NOTE}}     指数区一句话说明
+    {{FORTUNE_TEXT}}  签文
+    {{CHANCE_TEXT}}   近期机缘
+-->
+<style>
+  :root{
+    --mcd-red:#DA291C;
+    --mcd-yellow:#FFC72C;
+    --mcd-black:#292524;
+    --mcd-white:#FFFFFF;
+    --mcd-gray:#6B6B6B;
+    --mcd-bg:#F7F7F7;
+    --mcd-radius:16px;
+  }
+  .mcd-almanac{
+    width:min(100%,440px);
+    margin:0 auto;
+    background:var(--mcd-white);
+    border:1px solid var(--mcd-bg);
+    border-radius:var(--mcd-radius);
+    overflow:hidden;
+    font-family:"PingFang SC","Noto Sans SC",sans-serif;
+    color:var(--mcd-black);
+  }
+  .ma-head{
+    background:var(--mcd-red);
+    color:var(--mcd-white);
+    padding:18px 20px 16px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+  }
+  .ma-title{font-size:24px;font-weight:800;letter-spacing:4px;margin:0;}
+  .ma-date{font-size:12px;font-weight:600;text-align:right;line-height:18px;}
+  .ma-body{padding:16px 20px 18px;}
+  .ma-section{margin-bottom:14px;}
+  .ma-sec-head{
+    display:flex;align-items:center;gap:8px;
+    padding:8px 12px;border-radius:10px;margin-bottom:8px;
+  }
+  .ma-sec-yi{background:var(--mcd-yellow);color:var(--mcd-black);}
+  .ma-sec-ji{background:var(--mcd-red);color:var(--mcd-white);}
+  .ma-sec-head h3{margin:0;font-size:16px;font-weight:800;letter-spacing:3px;}
+  .ma-list{margin:0;padding-left:20px;}
+  .ma-list li{font-size:14px;line-height:22px;margin-bottom:6px;}
+  .ma-yi li::marker{color:var(--mcd-red);}
+  .ma-ji li::marker{color:var(--mcd-yellow);}
+  .ma-src{
+    display:inline-block;font-size:11px;color:var(--mcd-gray);
+    background:var(--mcd-bg);border-radius:999px;padding:1px 8px;margin-left:4px;
+  }
+  .ma-stats{display:flex;gap:8px;flex-wrap:wrap;}
+  .ma-stat{
+    flex:1;min-width:120px;background:var(--mcd-bg);border-radius:12px;
+    padding:10px 8px;text-align:center;
+  }
+  .ma-stat-label{font-size:11px;color:var(--mcd-gray);}
+  .ma-stat-value{font-size:15px;font-weight:800;margin-top:2px;color:var(--mcd-red);}
+  .ma-stat-note{grid-column:1/-1;font-size:11px;color:var(--mcd-gray);margin-top:6px;}
+  .ma-fortune{
+    background:var(--mcd-yellow);border-radius:12px;padding:14px 16px;text-align:center;
+  }
+  .ma-fortune-label{font-size:11px;font-weight:700;letter-spacing:5px;color:var(--mcd-black);}
+  .ma-fortune-text{font-size:15px;font-weight:700;line-height:24px;margin-top:4px;color:var(--mcd-black);}
+  .ma-chance{
+    margin-top:12px;font-size:12px;color:var(--mcd-black);
+    border:1px dashed var(--mcd-red);border-radius:10px;padding:8px 12px;
+  }
+  .ma-foot{
+    background:var(--mcd-red);color:var(--mcd-white);
+    font-size:10px;line-height:15px;text-align:center;padding:8px 12px;
+  }
+</style>
+<div class="mcd-almanac">
+  <div class="ma-head">
+    <h2 class="ma-title">麦门老黄历</h2>
+    <div class="ma-date">{{DATE}}<br>{{WEEKDAY}}</div>
+  </div>
+  <div class="ma-body">
+    <div class="ma-section">
+      <div class="ma-sec-head ma-sec-yi"><h3>今日宜</h3></div>
+      <ul class="ma-list ma-yi">
+        {{YI_ITEMS}}
+      </ul>
+    </div>
+    <div class="ma-section">
+      <div class="ma-sec-head ma-sec-ji"><h3>今日忌</h3></div>
+      <ul class="ma-list ma-ji">
+        {{JI_ITEMS}}
+      </ul>
+    </div>
+    <div class="ma-section ma-stats">
+      <div class="ma-stat">
+        <div class="ma-stat-label">幸运单品</div>
+        <div class="ma-stat-value">{{LUCKY_ITEM}}</div>
+        <div class="ma-stat-label">{{LUCKY_KCAL}}</div>
+      </div>
+      <div class="ma-stat">
+        <div class="ma-stat-label">财气</div>
+        <div class="ma-stat-value">{{WEALTH_STARS}}</div>
+      </div>
+      <div class="ma-stat">
+        <div class="ma-stat-label">手气</div>
+        <div class="ma-stat-value">{{LUCK_STARS}}</div>
+      </div>
+      <div class="ma-stat">
+        <div class="ma-stat-label">幸运指数</div>
+        <div class="ma-stat-value">{{INDEX_STARS}}</div>
+      </div>
+      <div class="ma-stat-note">{{STAT_NOTE}}</div>
+    </div>
+    <div class="ma-fortune">
+      <div class="ma-fortune-label">签 文</div>
+      <div class="ma-fortune-text">{{FORTUNE_TEXT}}</div>
+    </div>
+    <div class="ma-chance">📅 {{CHANCE_TEXT}}</div>
+  </div>
+  <div class="ma-foot">本黄历由实时数据推算，仅供参考，不构成营养或医疗建议；餐品与活动以麦当劳官方渠道为准</div>
+</div>
